@@ -24,6 +24,10 @@ function getFinals(data) {
     // const finalsData = data.filter(item => item["Stage"] === "Final")
     return data.filter(item => item["Stage"] === "Final")
 };
+
+// function getFinals(data) {
+//     // do this without arrow
+// }
 //test
 console.log(getFinals(fifaData))
 
@@ -46,7 +50,7 @@ function getWinners(cbGetFinals) {
         if(item["Home Team Goals"] > item["Away Team Goals"]) return item["Home Team Name"]
         else return item["Away Team Name"]
         // return Math.max(item["Home Team Goals"], item["Home Team Goals"])
-        //currently returning winning score, could be interesting solution
+        // // currently returning winning score, could be interesting solution
     })
     return winners
 };
@@ -60,16 +64,39 @@ Parameters:
  * callback function getYears
  */
 
+// // FOR LOOP
+// function getWinnersByYear(cbGetWinners, cbGetYears) {
+//     const winners = cbGetWinners
+//     const years = cbGetYears
+//     const yearlyWinners = []
+//     for(let i=0; i < winners.length; i++) {
+//         yearlyWinners.push(`In ${years[i]}, ${winners[i]} won the world cup!`)
+//     }
+//     return yearlyWinners
+//     // return years
+// };
+
+// .forEach() ARROW FUNCTION
 function getWinnersByYear(cbGetWinners, cbGetYears) {
     const winners = cbGetWinners
     const years = cbGetYears
     const yearlyWinners = []
-    for(let i=0; i < winners.length; i++) {
-        yearlyWinners.push(`In ${years[i]}, ${winners[i]} won the world cup!`)
-    }
+    winners.forEach((item, index) => {
+        yearlyWinners.push(`In ${years[index]}, ${item} won the world cup!`)
+    })
     return yearlyWinners
-    // return years
-};
+}
+
+// // .forEach() REGULAR FUNCTION
+// function getWinnersByYear(cbGetWinners, cbGetYears) {
+//     const winners = cbGetWinners
+//     const years = cbGetYears
+//     const yearlyWinners = []
+//     winners.forEach(function(item, index) {
+//         yearlyWinners.push(`In ${years[index]}, ${item} won the world cup!`)
+//     })
+//     return yearlyWinners
+// }
 //test
 console.log(getWinnersByYear(getWinners(getFinals(fifaData)), getYears(getFinals(fifaData))))
 
